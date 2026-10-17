@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resumo de Linux em 15 minutos</title>
+  <meta name="description" content="Preparação para a aula de Linux e Shell Script: os fundamentos em 15 minutos, com prática num terminal simulado.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffcc33' stroke-width='2' stroke-linecap='round'><rect x='2' y='4' width='20' height='16' rx='3' fill='%230b1020'/><path d='M6 9l3 3-3 3M12 15h6'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="prep.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-shell" viewBox="0 0 24 24"><path d="M4 7l5 5-5 5M12 17h8"/></symbol>
+    <symbol id="i-apps" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.8"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></symbol>
+    <symbol id="i-drive" viewBox="0 0 24 24"><path d="M5.5 13.5L7.5 5h9l2 8.5"/><rect x="3" y="13.5" width="18" height="7" rx="2"/><path d="M7 17h.01M10.5 17h.01"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1 2.2h5.2c0-1 .4-1.7 1-2.2A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="16" rx="2.5"/><path d="M7 9.5l3 2.5-3 2.5M12.5 15h4.5"/></symbol>
+    <symbol id="i-think" viewBox="0 0 24 24"><path d="M4 4.5h16v11H10l-6 4.5V4.5z"/><path d="M10 8.5a2 2 0 1 1 2.8 1.8c-.5.2-.8.7-.8 1.2M12 13.5h.01"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><rect x="3.5" y="7.5" width="17" height="13" rx="2"/><path d="M8.5 7.5V5.5a3.5 3.5 0 0 1 7 0v2"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3M12 14.5v2.5"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V3.5"/><path d="M5 4h12l-2.5 4.5L17 13H5"/></symbol>
+  </defs>
+</svg>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Antes da aula</p>
+    <h1>Resumo de Linux em 15 minutos</h1>
+    <p class="lead">Três conceitos para ajudar vocês a chegarem mais preparados para a aula de amanhã.</p>
+    <nav class="map" aria-label="Temas desta página">
+      <a href="#organizacao" class="map-item"><span class="map-n">1</span><span><b>Como o Linux se organiza</b><small><svg class="i"><use href="#i-clock"/></svg>5 min</small></span></a>
+      <a href="#comando" class="map-item"><span class="map-n">2</span><span><b>O que o shell faz quando você aperta Enter</b><small><svg class="i"><use href="#i-clock"/></svg>5 min</small></span></a>
+      <a href="#saida" class="map-item"><span class="map-n">3</span><span><b>Para onde vai a saída</b><small><svg class="i"><use href="#i-clock"/></svg>5 min</small></span></a>
+    </nav>
+    <p class="hint"><svg class="i"><use href="#i-bulb"/></svg>Palavras <button type="button" class="g" data-g="sublinhadas">sublinhadas</button> mostram uma definição rápida quando você toca nelas.</p>
+  </div>
+</header>
+
+<nav class="topnav" aria-label="Navegação">
+  <a href="#organizacao" data-spy="organizacao">1 · Organização</a>
+  <a href="#comando" data-spy="comando">2 · O comando</a>
+  <a href="#saida" data-spy="saida">3 · A saída</a>
+</nav>
+
+<main>
+
+<!-- ===================== TEMA 1 ===================== -->
+<section id="organizacao" class="topic">
+  <div class="wrap">
+    <p class="topic-n">Tema 1 de 3</p>
+    <h2>Como o Linux se organiza</h2>
+    <p class="hook">Quando você digita <code>ls</code>, quem realmente lê o disco?</p>
+
+    <div class="reveal">
+      <p>O Linux funciona em <b>camadas</b>, e cada uma só conversa com a vizinha. Você fala com o <button type="button" class="g" data-g="shell">shell</button>, que chama um programa (como o <code>ls</code>), que pede ao <button type="button" class="g" data-g="kernel">kernel</button>, e só o kernel mexe no hardware. É por isso que um programa comum não consegue apagar o arquivo de outro usuário: o kernel confere as permissões antes.</p>
+    </div>
+
+    <div class="v-layers reveal" aria-label="Diagrama das camadas do Linux"></div>
+
+    <div class="reveal">
+      <p>Os arquivos também têm uma organização própria. Não existe <code>C:\</code>: tudo fica numa <b>única árvore</b> que começa na <button type="button" class="g" data-g="raiz">raiz</button> <code>/</code>. Pendrives e discos aparecem como pastas dentro dela. Até dispositivos viram arquivos (é o famoso <b>"tudo é arquivo"</b>).</p>
+    </div>
+
+    <div class="v-tree reveal" aria-label="Árvore de diretórios">
+      <div class="t-row"><code>/</code><span>raiz de tudo</span></div>
+      <div class="t-row l1"><code>home/</code><span>pastas dos usuários</span></div>
+      <div class="t-row l2 here"><code>aluno/</code><span>sua <button type="button" class="g" data-g="home">home</button>, apelidada de <code>~</code></span></div>
+      <div class="t-row l1"><code>etc/</code><span>configurações do sistema</span></div>
+      <div class="t-row l1"><code>usr/bin/</code><span>os programas (o <code>ls</code> mora aqui)</span></div>
+      <div class="t-row l1"><code>var/log/</code><span>registros (logs) do que acontece</span></div>
+      <div class="t-row l1"><code>dev/</code><span>dispositivos, vistos como arquivos</span></div>
+    </div>
+
+    <div class="reveal">
+      <p>Para chegar a um arquivo, você usa um <b>caminho</b>. O <b>absoluto</b> começa na raiz e funciona de qualquer lugar (<code>/home/aluno/Documentos</code>). O <b>relativo</b> parte de onde você está (<code>Documentos</code>). Dois atalhos aparecem o tempo todo: <code>.</code> é "aqui" e <code>..</code> é "uma pasta acima".</p>
+    </div>
+
+    <div class="predict reveal">
+      <svg class="i"><use href="#i-eye"/></svg>
+      <div><b>Antes de rodar, pense:</b> se você está em <code>/home/aluno</code> e digita <code>cd ..</code>, onde vai parar? E depois de <code>cd ~</code>?</div>
+    </div>
+
+    <div class="mini-term reveal" data-cmds="pwd||ls /||cd ..||pwd||cd ~||pwd||cat /etc/hostname"></div>
+
+    <details class="think reveal">
+      <summary><svg class="i"><use href="#i-think"/></svg>Pare e pense: você está em <code>/home/aluno/Documentos</code>. Para onde leva o caminho <code>../../etc</code>?</summary>
+      <p>Para <code>/home/etc</code>, que provavelmente nem existe. Cada <code>..</code> sobe um nível: de <code>Documentos</code> para <code>aluno</code>, depois para <code>home</code>, e só então entra em <code>etc</code>. Para chegar na pasta de configurações do sistema, seria preciso subir mais um nível (<code>../../../etc</code>) ou, bem mais simples, usar o caminho absoluto <code>/etc</code>.</p>
+    </details>
+
+    <p class="takeaway reveal"><svg class="i"><use href="#i-bag"/></svg><span><b>Leve para a aula:</b> o kernel é o único que toca no hardware, e todos os arquivos vivem numa árvore só, a partir do <code>/</code>.</span></p>
+  </div>
+</section>
+
+<!-- ===================== TEMA 2 ===================== -->
+<section id="comando" class="topic">
+  <div class="wrap">
+    <p class="topic-n">Tema 2 de 3</p>
+    <h2>O que o shell faz quando você aperta Enter</h2>
+    <p class="hook">Por que <code>cat meu arquivo.txt</code> diz que o arquivo não existe, se ele está bem ali?</p>
+
+    <div class="reveal">
+      <p>A primeira coisa que o shell faz é <b>quebrar a linha em palavras</b>, usando os espaços. A primeira palavra é o comando; as outras são <button type="button" class="g" data-g="argumento">argumentos</button>. As que começam com <code>-</code> são <button type="button" class="g" data-g="opcao">opções</button>, que mudam o comportamento (<code>ls -l</code>). Um nome com espaço vira <b>duas</b> palavras, a não ser que você use aspas. Teste abaixo:</p>
+    </div>
+
+    <div class="v-split reveal" aria-label="Como o shell separa as palavras"></div>
+
+    <div class="reveal">
+      <p>Depois, o shell precisa <b>encontrar o programa</b>. Ele não procura no computador inteiro: olha só nas pastas listadas no <button type="button" class="g" data-g="path">PATH</button>, em ordem. A pasta onde você está <b>não</b> faz parte dessa lista, por segurança. Por isso, para rodar um script seu, você escreve <code>./ola.sh</code>: o <code>./</code> diz "este arquivo, aqui nesta pasta".</p>
+    </div>
+
+    <div class="v-path reveal" aria-label="Como o shell encontra um programa"></div>
+
+    <div class="predict reveal">
+      <svg class="i"><use href="#i-eye"/></svg>
+      <div><b>Antes de rodar, pense:</b> o que acontece com <code>ola.sh</code> sem o <code>./</code>? E com <code>LS</code>, em maiúsculas?</div>
+    </div>
+
+    <div class="mini-term reveal" data-cmds="cat meu arquivo.txt||cat &quot;meu arquivo.txt&quot;||echo $PATH||which ls||ola.sh||./ola.sh||LS"></div>
+
+    <details class="think reveal">
+      <summary><svg class="i"><use href="#i-think"/></svg>Pare e pense: quantos argumentos o <code>cp</code> recebe em <code>cp "foto 1.jpg" fotos/</code>?</summary>
+      <p><b>Dois:</b> <code>foto 1.jpg</code> (as aspas juntam as duas partes num argumento só) e <code>fotos/</code>. Sem as aspas, seriam três (<code>foto</code>, <code>1.jpg</code> e <code>fotos/</code>), e o <code>cp</code> tentaria copiar dois arquivos que não existem.</p>
+    </details>
+
+    <p class="takeaway reveal"><svg class="i"><use href="#i-bag"/></svg><span><b>Leve para a aula:</b> espaço separa argumentos (use aspas em nomes com espaço), o shell só acha programas no <code>PATH</code> (seu script precisa de <code>./</code>) e maiúsculas importam.</span></p>
+  </div>
+</section>
+
+<!-- ===================== TEMA 3 ===================== -->
+<section id="saida" class="topic">
+  <div class="wrap">
+    <p class="topic-n">Tema 3 de 3</p>
+    <h2>Para onde vai a saída</h2>
+    <p class="hook">Como juntar comandos pequenos para fazer algo grande, sem escrever nenhum programa?</p>
+
+    <div class="reveal">
+      <p>Todo programa nasce com três "canos" abertos: a <b>entrada</b> (<button type="button" class="g" data-g="stdin">stdin</button>), de onde ele lê; a <b>saída</b> (<button type="button" class="g" data-g="stdout">stdout</button>), onde escreve os resultados; e o canal de <b>erros</b> (<button type="button" class="g" data-g="stderr">stderr</button>). Normalmente a entrada é o teclado e as duas saídas vão para a tela. Mas a tela é só o destino padrão, e dá para mudá-lo.</p>
+    </div>
+
+    <div class="v-streams reveal" aria-label="Diagrama de entrada, saída e erros"></div>
+
+    <div class="reveal">
+      <p>Repare que <b>saída e erro são canais separados</b>. É isso que permite guardar os resultados num arquivo e ainda ver os erros na tela. E o <code>|</code> (pipe) é a ideia mais poderosa do Linux: ferramentas pequenas, cada uma fazendo uma coisa bem, ligadas em sequência.</p>
+      <p>Por fim, todo comando termina devolvendo um número, o <button type="button" class="g" data-g="codigo">código de saída</button>: <code>0</code> significa sucesso e qualquer outro valor significa erro. Você não vê esse número, mas ele fica guardado em <code>$?</code>. Os scripts usam esse código para decidir o que fazer em seguida.</p>
+    </div>
+
+    <div class="predict reveal">
+      <svg class="i"><use href="#i-eye"/></svg>
+      <div><b>Antes de rodar, pense:</b> em <code>ls /etc /nao_existe 2&gt; erros.txt</code>, o que aparece na tela, e o que vai para o arquivo?</div>
+    </div>
+
+    <div class="mini-term reveal" data-cmds="ls /etc /nao_existe||ls /etc /nao_existe 2&gt; erros.txt||cat erros.txt||ls /etc | wc -l||ls /nao_existe||echo $?||ls /etc &gt; /dev/null||echo $?"></div>
+
+    <details class="think reveal">
+      <summary><svg class="i"><use href="#i-think"/></svg>Pare e pense: num script de backup, como saber se a cópia deu certo antes de apagar o original?</summary>
+      <p>Pelo <b>código de saída</b>. Se o <code>cp</code> falhar, ele devolve um número diferente de <code>0</code>. Dá para encadear: <code>cp dados.txt backup/ &amp;&amp; rm dados.txt</code>. O <code>&amp;&amp;</code> só executa o <code>rm</code> se o <code>cp</code> tiver dado certo. Na aula, você vai ver como fazer o mesmo com <code>if</code>.</p>
+    </details>
+
+    <p class="takeaway reveal"><svg class="i"><use href="#i-bag"/></svg><span><b>Leve para a aula:</b> saída e erros são canais separados, que você redireciona com <code>&gt;</code> e <code>2&gt;</code> ou liga a outro programa com <code>|</code>. E todo comando devolve um código: <code>0</code> é sucesso.</span></p>
+  </div>
+</section>
+
+<!-- ===================== OPCIONAL ===================== -->
+<section id="extra" class="topic extra">
+  <div class="wrap">
+    <details class="extra-box">
+      <summary><svg class="i"><use href="#i-lock"/></svg><span><b>Para quem quiser ir além (opcional):</b> quem pode o quê, as permissões</span></summary>
+      <p>Cada arquivo tem um <b>dono</b>, um <b>grupo</b> e o resto do mundo (<b>outros</b>). Para cada um, três permissões: <b>r</b> (ler), <b>w</b> (escrever) e <b>x</b> (executar). O <code>ls -l</code> mostra isso como <code>-rwxr-xr--</code>, e o comando <code>chmod</code> muda as permissões. Cada permissão vale um número (<code>r=4</code>, <code>w=2</code>, <code>x=1</code>), e a soma de cada grupo forma o famoso <code>chmod 755</code>. Toque nos bits:</p>
+      <div class="v-perm" data-initial="754"></div>
+      <p>O <button type="button" class="g" data-g="root">root</button>, o administrador, ignora essas regras. Por isso, no dia a dia você trabalha como usuário comum e só usa <code>sudo</code> quando realmente precisa: é o <b>princípio do menor privilégio</b>.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ===================== FECHAMENTO ===================== -->
+<section class="topic closing">
+  <div class="wrap">
+    <h2>Pronto para a aula</h2>
+    <p>Na aula, você vai usar cada ideia desta página:</p>
+    <div class="bridge">
+      <div class="bridge-item"><span class="map-n">1</span><p><b>Organização</b> → navegar e procurar arquivos com <code>cd</code>, <code>ls</code> e <code>find</code>, sem se perder na árvore.</p></div>
+      <div class="bridge-item"><span class="map-n">2</span><p><b>O comando</b> → evitar as armadilhas mais comuns e rodar os seus próprios scripts com <code>./</code>.</p></div>
+      <div class="bridge-item"><span class="map-n">3</span><p><b>A saída</b> → combinar comandos com pipes e fazer scripts que tomam decisões com <code>if</code>.</p></div>
+    </div>
+    <p class="final"><svg class="i"><use href="#i-flag"/></svg><span>E no fim tem um desafio prático para colocar tudo isso em uso. Ficou com alguma dúvida? <b>Anote e leve para a aula.</b></span></p>
+    <p class="small">O terminal desta página é um simulador que roda no seu navegador: nada do que você digita sai do seu computador, e nada fica salvo.</p>
+  </div>
+</section>
+
+</main>
+
+<div id="gloss" class="gloss" role="tooltip" hidden></div>
+
+<script src="prep.bundle.js" defer></script>
+</body>
+</html>
